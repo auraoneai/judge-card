@@ -12,7 +12,25 @@ from .schema import validate
 
 def generate(bench: dict) -> dict:
     prompt_hash = hashlib.sha256(json.dumps(bench.get("results", []), sort_keys=True).encode()).hexdigest()
-    return {"model_id": bench.get("model", "unknown"), "prompt_hash": prompt_hash, "calibration_summary": {r.get("probe", "probe"): r.get("flip_rate", r.get("first_position_rate")) for r in bench.get("results", [])}, "known_biases": [{"probe": r.get("probe"), "value": r.get("flip_rate", 0)} for r in bench.get("results", [])], "recommended_use": "Use for diagnostic review only; this is not a benchmark.", "generated_at": datetime.now(timezone.utc).isoformat(), "synthetic": bool(bench.get("synthetic", True))}
+    results = bench.get("results", [])
+    return {
+        "model_id": bench.get("model", "unknown"),
+        "prompt_hash": prompt_hash,
+        "calibration_summary": {
+            str(r.get("probe", "probe")): r.get("flip_rate", r.get("first_position_rate", r.get("score_variance", 0)))
+            for r in results
+        },
+        "known_biases": [
+            {
+                "probe": str(r.get("probe", "unknown")),
+                "value": r.get("flip_rate", r.get("first_position_rate", r.get("score_variance", 0))),
+            }
+            for r in results
+        ],
+        "recommended_use": "Use for diagnostic review only; this is not a benchmark.",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "synthetic": bool(bench.get("synthetic", True)),
+    }
 
 
 def load_card(path: str | Path) -> dict:
@@ -27,6 +45,9 @@ def main(argv=None):
     args=p.parse_args(argv)
     if args.cmd == "generate":
         card=generate(json.loads(Path(args.source).read_text())); out=Path(args.out)
+        errors = validate(card)
+        if errors:
+            print(json.dumps({"ok": False, "errors": errors}, indent=2)); return 1
         out.write_text(markdown(card) if out.suffix=='.md' else html(card) if out.suffix=='.html' else json.dumps(card, indent=2))
         print(json.dumps(card, indent=2)); return 0
     card=load_card(args.path); errors=validate(card); print(json.dumps({"ok": not errors, "errors": errors}, indent=2)); return 0 if not errors else 1

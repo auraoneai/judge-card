@@ -1,6 +1,6 @@
 {
   "model_id": "local-judge",
-  "prompt_hash": "synthetic",
+  "prompt_hash": "8b43803b5242924e5260b9fb7393b5e61cad1ed6278c0c854c85bd4943d4a96e",
   "calibration_summary": {
     "position_bias": 0.2
   },

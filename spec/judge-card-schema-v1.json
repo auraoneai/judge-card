@@ -12,10 +12,12 @@
   ],
   "properties": {
     "model_id": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "prompt_hash": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
     },
     "calibration_summary": {
       "type": "object"
@@ -23,14 +25,27 @@
     "known_biases": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "probe",
+          "value"
+        ],
+        "properties": {
+          "probe": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {}
+        }
       }
     },
     "recommended_use": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "generated_at": {
-      "type": "string"
+      "type": "string",
+      "format": "date-time"
     },
     "synthetic": {
       "type": "boolean"

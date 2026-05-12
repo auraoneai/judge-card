@@ -1,5 +1,16 @@
 def markdown(card: dict) -> str:
-    lines=["# Judge Card", "", f"- Model: {card.get('model_id')}", f"- Prompt hash: {card.get('prompt_hash')}", f"- Generated: {card.get('generated_at')}", "", "## Calibration Summary"]
+    lines=[
+        "# Judge Card",
+        "",
+        "This diagnostic disclosure is not a model benchmark or endorsement.",
+        "",
+        f"- Model: {card.get('model_id')}",
+        f"- Prompt hash: {card.get('prompt_hash')}",
+        f"- Generated: {card.get('generated_at')}",
+        f"- Synthetic source: {card.get('synthetic', True)}",
+        "",
+        "## Calibration Summary",
+    ]
     for k,v in card.get('calibration_summary',{}).items(): lines.append(f"- {k}: {v}")
     lines += ["", "## Known Biases"]
     for b in card.get('known_biases',[]): lines.append(f"- {b.get('probe','unknown')}: {b.get('value')}")
