@@ -7,6 +7,7 @@
 ```bash
 pip install judge-card
 judge-card generate --from judge-bench-output.json --out card.md
+judge-card validate examples/tutorial_judge_card.json
 ```
 
 ## What This Is Not

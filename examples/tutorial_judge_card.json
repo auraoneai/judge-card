@@ -1,0 +1,16 @@
+{
+  "model_id": "local-judge",
+  "prompt_hash": "synthetic",
+  "calibration_summary": {
+    "position_bias": 0.2
+  },
+  "known_biases": [
+    {
+      "probe": "position_bias",
+      "value": 0.2
+    }
+  ],
+  "recommended_use": "Use for diagnostic review only; this is not a benchmark.",
+  "generated_at": "2026-05-12T00:00:00+00:00",
+  "synthetic": true
+}
