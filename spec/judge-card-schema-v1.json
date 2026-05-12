@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Judge Card v1",
+  "type": "object",
+  "required": [
+    "model_id",
+    "prompt_hash",
+    "calibration_summary",
+    "known_biases",
+    "recommended_use",
+    "generated_at"
+  ],
+  "properties": {
+    "model_id": {
+      "type": "string"
+    },
+    "prompt_hash": {
+      "type": "string"
+    },
+    "calibration_summary": {
+      "type": "object"
+    },
+    "known_biases": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "recommended_use": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "synthetic": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}
