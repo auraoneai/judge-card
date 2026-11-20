@@ -1,5 +1,16 @@
 # judge-card
 
+**LLM judge disclosure cards.** Part of [judge-bench](https://auraone.ai/open/judge-bench).
+
+```bash
+python -m pip install judge-card==0.1.2
+judge-card generate --from examples/judge_bench_output.json --out judge-card.json
+judge-card validate judge-card.json
+```
+
+From a source checkout `validate` returns JSON with `"ok": true` and an empty
+`"errors"` list.
+
 Turn LLM judge diagnostics into a portable disclosure card that reviewers can inspect and archive.
 
 `judge-card` is for evaluation owners, auditors, and release reviewers who need a small, stable record of the judge model, diagnostic summary, known bias signals, recommended use, generation time, and synthetic-data disclosure. It validates the card shape and renders the same evidence as JSON, Markdown, or HTML.
@@ -53,3 +64,12 @@ A Judge Card discloses the supplied diagnostic evidence; it does not independent
 ## Next Action
 
 Generate JSON and Markdown cards from the matching `judge-bench` report, review the model id, prompt hash, bias rows, and recommended use, then attach the JSON card to the corresponding eval-run manifest.
+
+Part of the AuraOne review quality workflow:
+[iaa-kit](https://auraone.ai/open/iaa-kit) →
+[judge-bench](https://auraone.ai/open/judge-bench).
+
+---
+
+Need an independent model-quality evaluation or benchmark program?
+[Talk to AuraOne](https://auraone.ai/contact?from=open:judge-bench)
