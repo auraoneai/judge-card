@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "judge-card"
 version = "0.1.2"
-description = "Generate, validate, and render inspectable LLM judge disclosure cards from diagnostic results."
+description = "LLM judge disclosure cards: generate, validate, and render inspectable cards from judge diagnostic results."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [{ name = "AuraOne" }]
-keywords = ["llm-as-judge", "judge-card", "model-evaluation", "ai-governance", "evals", "disclosure"]
+keywords = ["llm-as-judge", "judge-card", "model-evaluation", "ai-governance", "evals", "disclosure", "llm-judge-card"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",
@@ -26,11 +26,12 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/auraoneai/judge-card"
+Homepage = "https://auraone.ai/open/judge-bench"
 Documentation = "https://github.com/auraoneai/judge-card#readme"
 Repository = "https://github.com/auraoneai/judge-card.git"
 Issues = "https://github.com/auraoneai/judge-card/issues"
 Changelog = "https://github.com/auraoneai/judge-card/blob/main/CHANGELOG.md"
+Source = "https://github.com/auraoneai/judge-card"
 
 [project.scripts]
 judge-card = "judge_card.generator:main"
